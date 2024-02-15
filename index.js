@@ -30,10 +30,22 @@ const app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors({ origin: 'http://localhost:3000' }));
-
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
+app.get('/Shop', (req, res) => {
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
+app.get('/Login', (req, res) => {
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname,'build','index.html'))
+})
+app.get('/Admin', (req, res) => {
+    res.sendFile(path.join(__dirname,'build','index.html'))
 })
 
 // login user
@@ -159,7 +171,7 @@ app.get('/getCoinPrise', (req, res) => {
         res.json({ cr: item.coinRate - 1 });
     })
 })
-app.get('/Admin', async (req, res) => {
+app.get('/AdminData', async (req, res) => {
     let cr;
     let history = [];
     await adminModel.findOne({}).then((item) => {
